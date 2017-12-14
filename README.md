@@ -1,5 +1,5 @@
 # just for test
 
-[toc]
+[TOC]
 
 ---
