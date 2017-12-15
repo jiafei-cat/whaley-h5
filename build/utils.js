@@ -1,5 +1,11 @@
 // 该插件的主要是为了抽离css样式,防止将样式打包在js中引起页面样式加载错乱的现象
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+// 静态资源存放目录
+exports.assetsPath = function (_path) {
+  var assetsSubDirectory = 'static'
+  return path.posix.join(assetsSubDirectory, _path)
+}
 
 // 用于cssloader的配置
 // sass-loader前提要装node-sass
@@ -47,12 +53,31 @@ exports.cssLoaders = function (options) {
   }
   return {
     // @param {Boolean} indentedSyntax - 缩进
-    css: generateLoaders(),                                  // => ['vue-style-loader']
-    postcss: generateLoaders(),                              // => ['vue-style-loader']
-    less: generateLoaders('less'),                           // => ['vue-style-loader', {loader: 'less-loader', options: {}}]
-    sass: generateLoaders('sass', { indentedSyntax: true }), // => ['vue-style-loader',  {loader: 'sass-loader', options: { indentedSyntax: true }]
-    scss: generateLoaders('sass'),                           // => ['vue-style-loader', {loader: 'less-loader', options: {}}]
-    stylus: generateLoaders('stylus'),                       // => ['vue-style-loader', {loader: 'less-loader', options: {}}]
-    styl: generateLoaders('stylus')                          // => ['vue-style-loader', {loader: 'less-loader', options: {}}]
+    css: generateLoaders(),                                  // => ['vue-style-loader', {loader: 'css-loader', options: {}}]
+    postcss: generateLoaders(),                              // => ['vue-style-loader', {loader: 'css-loader', options: {}}]
+    less: generateLoaders('less'),                           // => ['vue-style-loader', {loader: 'css-loader', options: {}}, {loader: 'less-loader', options: {}}]
+    sass: generateLoaders('sass', { indentedSyntax: true }), // => ['vue-style-loader', {loader: 'css-loader', options: {}},  {loader: 'sass-loader', options: { indentedSyntax: true }]
+    scss: generateLoaders('sass'),                           // => ['vue-style-loader', {loader: 'css-loader', options: {}}, {loader: 'less-loader', options: {}}]
+    stylus: generateLoaders('stylus'),                       // => ['vue-style-loader', {loader: 'css-loader', options: {}}, {loader: 'less-loader', options: {}}]
+    styl: generateLoaders('stylus')                          // => ['vue-style-loader', {loader: 'css-loader', options: {}}, {loader: 'less-loader', options: {}}]
   }
+}
+
+// 根据vue文件使用的cssloader遍历加载到rules匹配css单独文件
+//  result
+//  output = [
+//    test: /\.css$/,
+//    use: ['vue-style-loader', {loader: 'css-loader', options: {}}]
+//  ]
+exports.styleLoaders = function (options) {
+  var output = []
+  var loaders = exports.cssLoaders(options)
+  for (var extension in loaders) {
+    var loader = loaders[extension]
+    output.push({
+      test: new RegExp('\\.' + extension + '$'), // css => /\.css$/
+      use: loader
+    })
+  }
+  return output
 }

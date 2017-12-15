@@ -4,7 +4,7 @@ module.exports = {
   loaders: utils.cssLoaders({
     // 是否生成map文件
     sourceMap: true,
-    // 是否提取css
+    // 是否提取css到单独文件
     extract: false
   }),
   /**
