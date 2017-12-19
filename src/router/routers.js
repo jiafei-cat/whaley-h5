@@ -11,7 +11,14 @@ const routers = [{
       name: 'home',
       component: resolve => require(['@/pages/home/index'], resolve),
       meta: {
-        title: 'home'
+        title: '☼Seven Store☼ - home'
+      }
+    }, {
+      path: '/article',
+      name: 'article',
+      component: resolve => require(['@/pages/article/index'], resolve),
+      meta: {
+        title: '☼Seven Store☼ - article'
       }
     }
   ]

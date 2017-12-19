@@ -67,3 +67,16 @@ $fc:#fff;
 	display: flex;
 	justify-content: $type;
 }
+
+@mixin abBorder($borderTop: 50%, $borderLeft: 50%, $borderColor: rgba(0, 0, 0, .7), $borderWidth: 100%, $borderHeight: 2px){
+	&:after{
+		content: '';
+		position: absolute;
+		width: $borderWidth;
+		height: $borderHeight;
+		background: $borderColor;
+		top: $borderTop;
+		left: $borderLeft;
+		transform: translate(-50%, -50%);
+	}
+}

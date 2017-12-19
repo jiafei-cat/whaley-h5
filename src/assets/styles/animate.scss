@@ -1,0 +1,54 @@
+.seven-pop-out-enter-active,
+.seven-pop-out-leave-active,
+.seven-pop-in-enter-active,
+.seven-pop-in-leave-active {
+  will-change: transform;
+  height: 100%;
+  position: absolute;
+  left: 0;
+}
+.seven-pop-out-enter-active {
+  animation: fadeIn 5s;
+}
+.seven-pop-out-leave-active {
+  animation: fadeOut 5s;
+}
+.seven-pop-in-enter-active {
+  perspective: 1000;
+  animation: fadeIn 5s;
+}
+.seven-pop-in-leave-active {
+  animation: fadeOut 5s;
+}
+@keyframes zoomOut {
+  0% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0;
+    transform: scale3d(3, 3, 3)
+  }
+
+  to {
+    opacity: 0
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1
+  }
+  
+  to {
+    opacity: 0
+  }
+}
