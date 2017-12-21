@@ -1,13 +1,13 @@
 <template>
   <div class="seven-container">
     <s-head></s-head>
-    <transition :name="'seven-pop-' + (direction === 'forward' ? 'in' : 'out')">
-      <div class="seven-container-child">
+    <transition name="seven">
         <keep-alive>
           <router-view v-if="$route.meta.keepAlive"></router-view>
         </keep-alive>
+    </transition>
+    <transition name="seven">
         <router-view v-if="!$route.meta.keepAlive"></router-view>
-      </div>
     </transition>
   </div>
 </template>
@@ -15,6 +15,7 @@
 import sHead from '@/components/head'
 import '@/assets/styles/common.scss'
 import '@/assets/styles/mixin.scss'
+import '@/assets/styles/markdown.scss'
 import '@/assets/styles/animate.scss'
 import { mapState } from 'vuex'
 export default {
@@ -38,14 +39,20 @@ export default {
   height: 100%;
 }
 
-</style>
-<style lang="scss" scoped>
+.seven-enter-active,
+.seven-leave-active {
+  transition: all .2s ease;
+}
+
+.seven-enter,
+.seven-leave-active {
+  opacity: 0;
+}
 .seven-container{
   background: url('assets/images/bg/bg-2.jpg') 0 0;
   background-size: cover;
-  .seven-container-child{
-    padding-top: 85px;
-  }
+  padding-top: 85px;
+  overflow: auto;
 }
 </style>
 

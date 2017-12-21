@@ -20,6 +20,13 @@ const routers = [{
       meta: {
         title: '☼Seven Store☼ - article'
       }
+    }, {
+      path: '/article/detail',
+      name: 'articleDetail',
+      component: resolve => require(['@/pages/article/detail'], resolve),
+      meta: {
+        title: '☼Seven Store☼ - articleDetail'
+      }
     }
   ]
 }]

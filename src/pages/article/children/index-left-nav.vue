@@ -1,5 +1,5 @@
 <template>
-  <section class="seven-home_leftNav">
+  <section class="seven-left-nav">
     <div class="home-title">
       <p>Best</p>
       <p>Story</p>
@@ -30,11 +30,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.seven-home_leftNav {
+.seven-left-nav {
   padding-top: 1%;
   width: 30%;
   min-width: 200px;
   position: relative;
+  background: #fff;
   .home-title {
     p{
       line-height: 60px;

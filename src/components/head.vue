@@ -31,10 +31,11 @@ export default {
   },
   computed: {
     curPath () {
-      return '/' + this.$route.name
+      return this.$route.path.match(/^\/[a-zA-z]+/).join(' ')
     }
   },
   mounted () {
+    console.log(this.curPath)
   }
 }
 </script>

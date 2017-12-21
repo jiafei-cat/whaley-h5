@@ -1,7 +1,7 @@
 <template>
-  <section class="seven-home-card">
+  <section class="seven-card">
     <swiper class="swiper-container" :options="swiperOption" :style="outStyle">
-      <swiperSlide class="card-item" v-for="(item, index) in articleList" :key="item.title" :class="{'fade-out': outIndex === index}">
+      <swiperSlide class="card-item" v-for="(item, index) in articleList" :key="item.title" :class="{'fade-out': outIndex === index}" :style="{'zIndex': outIndex === index ? zIndexLevel : 0 }">
         <div class="card-img" :style="{'backgroundImage': 'url('+item.imgUrl+')'}"  @click="goDetail(index)">
           <p class="card-title">{{ item.title}}</p>
         </div>
@@ -26,6 +26,7 @@ export default {
         'overflow': 'hidden',
         'width': 'auto'
       },
+      zIndexLevel: 9,
       swiperOption: {
         slidesPerView: 3,
         spaceBetween: 30,
@@ -62,8 +63,8 @@ export default {
     goDetail (index){
       this.outIndex = index
       this.outStyle.overflow = 'inherit'
-      this.outStyle.width = '1200px'
-      setTimeout(()=>this.GO_PAGE({'path': '/article'}), 600)
+      this.outStyle.width = '1300px'
+      setTimeout(()=>this.GO_PAGE({'path': '/article/detail'}), 250)
     },
     ...mapMutations({ GO_PAGE })
   },
@@ -80,7 +81,7 @@ export default {
 <style lang="scss">
 @import '../../../assets/styles/mixin';
 @import '../../../assets/styles/animate';
-.seven-home-card{
+.seven-card{
   width: 70%;
   min-width: 1300px;
   height: 100%;
@@ -91,7 +92,7 @@ export default {
     padding-left: 2%;
     padding-top: 2%;
     &.fade-out{
-      animation: zoomOut 3s;
+      animation: zoomOut 1s;
     }
     .card-img{
       overflow: hidden;
